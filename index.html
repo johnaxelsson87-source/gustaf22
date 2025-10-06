@@ -554,6 +554,27 @@
     updateCart(); // Init
 
     // Swish med förbättrad email-hantering
+    // Uppdaterad sendConfirmationEmail-funktion (med bättre error-info)
+    function sendConfirmationEmail(orderId, total, note) {
+      const templateParams = {
+        to_email: 'johnaxelsson87@gmail.com', // Ändra om du vill skicka till annan adress
+        orderId: orderId,
+        total: total,
+        products: window.productsList || 'Inga produkter',
+        swishRef: orderId,
+        note: note || 'Ingen notering',
+        date: new Date().toLocaleString('sv-SE')
+      };
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then((response) => {
+          console.log('Mail skickad OK!', response.status, response.text);
+          // Ingen alert här – tyst framgång (eller lägg till en diskret notis om du vill)
+        }, (error) => {
+          console.error('EmailJS-fel:', error); // Kolla konsolen för detaljer
+          alert(`Fel vid mail: ${error.text || 'Kontrollera verifiering i EmailJS-dashboarden.'}\nSe konsolen för mer info.`);
+        });
+    }
+    // Uppdaterad checkout-funktion (skickar mail direkt, ingen popup)
     function checkout() {
       if (!Object.keys(cart).length) {
         alert('Korgen är tom!');
@@ -578,7 +599,7 @@
         }
       });
 
-      // Skicka initialt bekräftelsemail (utan notering)
+      // Skicka mail direkt här (utan notering initialt)
       sendConfirmationEmail(orderId, total, '');
 
       setTimeout(closeModal, 30000);
@@ -605,30 +626,13 @@
       const receipt = `Kvitto\nBelopp: ${amount} kr\nReferens: ${ref}\nTack för ditt köp!`;
       navigator.clipboard.writeText(receipt).then(() => alert('Kvitto kopierat!'));
     }
-    function sendConfirmationEmail(orderId, total, note) {
-      const templateParams = {
-        to_email: 'johnaxelsson87@gmail.com', // Mottagare (du kan ändra detta)
-        orderId: orderId,
-        total: total,
-        products: window.productsList || 'Inga produkter',
-        swishRef: orderId,
-        note: note || 'Ingen notering',
-        date: new Date().toLocaleString('sv-SE')
-      };
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-        .then((response) => {
-          console.log('Bekräftelsemail skickad!', response.status, response.text);
-          alert(`Bekräftelse skickad till johnaxelsson87@gmail.com! (Status: ${response.status})`);
-        }, (error) => {
-          console.error('Email-fel:', error);
-          alert('Fel vid sändning av email. Kontrollera konsolen och se till att ditt EmailJS-konto är verifierat. Gå till EmailJS dashboard och bekräfta din email-adress om du inte gjort det.');
-        });
-    }
+    // Uppdaterad sendEmail (för notering i modalen)
     function sendEmail() {
       const note = document.getElementById('customer-note').value || 'Ingen notering';
       const orderId = document.getElementById('order-ref').textContent;
       const total = parseInt(document.getElementById('modal-amount').textContent);
-      sendConfirmationEmail(orderId, total, note);
+      sendConfirmationEmail(orderId, total, note); // Skickar uppdaterad version
+      // Ingen alert – tyst, men kolla konsolen
     }
 
     // Kontaktformulär (simulerat, kan utökas med EmailJS)
