@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="sv"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Bambu &amp; Basics – Bambuplagg med Swish-betalning&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="description" content="Enkel shopping för bambu-strumpor, T-shirts, underkläder och mer. Betala säkert med Swish – hållbart och bekvämt!"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta property="og:title" content="Bambu &amp; Basics"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta property="og:description" content="Hållbara bambuplagg – köp nu via Swish."&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta property="og:image" content="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&amp;fit=crop&amp;w=1200&amp;q=60"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Google Analytics --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.dataLayer = window.dataLayer || [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function gtag(){dataLayer.push(arguments);}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gtag('js', new Date());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gtag('config', 'GA_MEASUREMENT_ID'); // Byt till er ID</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- QR Code Library --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- EmailJS Library --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="text/javascript"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>(function(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>emailjs.init("YOUR_USER_ID"); // Byt till ditt EmailJS User ID (t.ex. user_abc123)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>})();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--bg: #fff; --text: #333; --accent-brorsan: #4ecdc4;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--muted: #666; --border: #eee; --shadow: rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[data-theme="dark"] { --bg: #1a1a1a; --text: #fff; --border: #333; --shadow: rgba(0,0,0,0.3); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: system-ui; margin: 0; padding: 0; background: var(--bg); color: var(--text); transition: all 0.3s; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--accent-brorsan); color: white; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.brand { font-size: 1.5rem; } .dot { background: var(--accent-brorsan); width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.toggles { display: flex; gap: 1rem; } button, input, select { border: 1px solid var(--border); border-radius: 4px; padding: 0.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hero { text-align: center; padding: 2rem; } .hero h1 { font-size: clamp(1.5rem, 5vw, 3rem); } .cta { background: var(--text); color: var(--bg); padding: 0.75rem 1.5rem; border: none; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.search-filters { display: flex; gap: 1rem; justify-content: center; margin: 1rem; flex-wrap: wrap; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.search-input { flex: 1; max-width: 300px; } .filter-btn { background: var(--accent-brorsan); color: white; border: none; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.filter-btn.active { opacity: 0.7; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card:hover { transform: scale(1.05); } img { width: 100%; height: 150px; object-fit: cover; transition: transform 0.3s; loading: lazy; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img:hover { transform: scale(1.05); } .pad { padding: 0.75rem; } .price { font-weight: bold; color: var(--accent-brorsan); font-size: 0.9rem; }<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>h3 { font-size: 1.1rem; margin: 0.5rem 0; } .muted { font-size: 0.85rem; } .qtyrow { display: flex; gap: 0.25rem; align-items: center; flex-wrap: wrap; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.buy { background: var(--accent-brorsan); color: white; border: none; cursor: pointer; font-size: 0.85rem; padding: 0.4rem 0.8rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.buy:disabled { background: var(--muted); cursor: not-allowed; } .stock { color: var(--muted); font-size: 0.8rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.variations { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.25rem 0; } .variations select { font-size: 0.8rem; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.cart { position: fixed; top: 1rem; right: 1rem; background: var(--bg); border: 1px solid var(--border); padding: 1rem; box-shadow: var(--shadow); max-width: 300px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.modal-content { background: var(--bg); padding: 2rem; border-radius: 8px; max-width: 400px; text-align: center; max-height: 80vh; overflow-y: auto; } .close { float: right; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#qr-code { margin: 1rem 0; } .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--text); color: var(--bg); padding: 1rem; text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border); } .lang-toggle { margin-left: auto; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-sellers { background: var(--accent-brorsan); color: white; padding: 1rem; margin: 1rem; border-radius: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 768px) { .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; } .search-filters { flex-direction: column; align-items: center; } }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body data-theme="light"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="brand"&gt;&lt;span class="dot"&gt;&lt;/span&gt;&lt;span id="brandTitle"&gt;Bambu &amp; Basics&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="toggles"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="toggleLang()"&gt;EN&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="toggleTheme()"&gt;🌙&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Toppsäljare --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section class="top-sellers"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Toppsäljare&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Bambu-strumpor (3-pack) – 149 kr | Bambu T-shirt – 249 kr&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Brorsan Shop --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="brorsan" class="shop active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;Bambu &amp; Basics&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Hållbara bambuplagg för vardagen – betala säkert med Swish!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="search-filters"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" class="search-input" id="search" placeholder="Sök produkter..." oninput="filterProducts()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="filter-btn active" onclick="filterCategory('all')"&gt;Alla&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="filter-btn" onclick="filterCategory('strumpor')"&gt;Strumpor&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="filter-btn" onclick="filterCategory('tröjor')"&gt;Tröjor&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="filter-btn" onclick="filterCategory('kit')"&gt;Kit&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="cta" onclick="scrollToProducts()"&gt;Se produkter&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="grid" id="product-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="strumpor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu-strumpor" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p1-title"&gt;Bambu-strumpor (3-pack)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p1-desc"&gt;Mjuka, andningsbara vardagsstrumpor.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p1-size"&gt;&lt;option&gt;S&lt;/option&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p1-color"&gt;&lt;option&gt;Vit&lt;/option&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 20 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;149 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p1', 149)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="tröjor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu T-shirt" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p2-title"&gt;Bambu T-shirt&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p2-desc"&gt;Sval och snabbtorkande i bambumix.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p2-size"&gt;&lt;option&gt;S&lt;/option&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;option&gt;XL&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p2-color"&gt;&lt;option&gt;Vit&lt;/option&gt;&lt;option&gt;Svart&lt;/option&gt;&lt;option&gt;Grön&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 15 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;249 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p2', 249)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="kit"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu startkit" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p3-title"&gt;Bambu startkit&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p3-desc"&gt;1 T-shirt + 3-pack strumpor till rabattpris.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p3-size"&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p3-color"&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 8 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;399 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p3', 399)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="underkläder"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu boxershorts" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p4-title"&gt;Bambu boxershorts (2-pack)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p4-desc"&gt;Bekväma underbyxor med mjuk bambu.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p4-size"&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;option&gt;XL&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p4-color"&gt;&lt;option&gt;Svart&lt;/option&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 12 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;179 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p4', 179)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="tröjor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu hoodie" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p5-title"&gt;Bambu hoodie&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p5-desc"&gt;Varm och len hoodtröja för kyliga dagar.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p5-size"&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;option&gt;XL&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p5-color"&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;option&gt;Grön&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 10 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;449 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p5', 449)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="underkläder"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu linnen" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p6-title"&gt;Bambu linnen (3-pack)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p6-desc"&gt;Lätta undertröjor för sommar och natt.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p6-size"&gt;&lt;option&gt;S&lt;/option&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p6-color"&gt;&lt;option&gt;Vit&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 18 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;299 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p6', 299)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="byxor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu byxor" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p7-title"&gt;Bambu chinos&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p7-desc"&gt;Slim-fit byxor i bambumix för kontoret.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p7-size"&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;option&gt;XL&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p7-color"&gt;&lt;option&gt;Beige&lt;/option&gt;&lt;option&gt;Svart&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 6 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;599 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p7"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p7', 599)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="tillbehör"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu väska" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p8-title"&gt;Bambu ryggsäck&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p8-desc"&gt;Miljövänlig väska med bambufiber.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p8-size"&gt;&lt;option&gt;Standard&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p8-color"&gt;&lt;option&gt;Grön&lt;/option&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 14 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;349 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p8', 349)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="tillbehör"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1551024506-cbf40702a8f2?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu handduk" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p9-title"&gt;Bambu handduk&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p9-desc"&gt;Snabbtorkande badhandduk i bambu.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p9-size"&gt;&lt;option&gt;Standard&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p9-color"&gt;&lt;option&gt;Blå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;Slut i lager&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;199 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p9" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" disabled&gt;Slut i lager&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="underkläder"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu morgonrock" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p10-title"&gt;Bambu morgonrock&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p10-desc"&gt;Mjuk och varm för morgonrutinen.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p10-size"&gt;&lt;option&gt;L&lt;/option&gt;&lt;option&gt;XL&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p10-color"&gt;&lt;option&gt;Vit&lt;/option&gt;&lt;option&gt;Grå&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 7 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;499 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p10', 499)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="underkläder"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1602293589930-45aad31a38b5?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu kalsonger" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p11-title"&gt;Bambu kalsonger (5-pack)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p11-desc"&gt;Hälsosamma och antibakteriella underkläder.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p11-size"&gt;&lt;option&gt;S&lt;/option&gt;&lt;option&gt;M&lt;/option&gt;&lt;option&gt;L&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p11-color"&gt;&lt;option&gt;Svart&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 25 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;249 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p11"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p11', 249)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;article class="card" data-category="kit"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://images.unsplash.com/photo-1542272604-787c3835532a?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu kit familj" loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pad"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3 id="p12-title"&gt;Familjepaket&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="muted" id="p12-desc"&gt;Strumpor + T-shirts för hela familjen.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="variations"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p12-size"&gt;&lt;option&gt;Familj&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="p12-color"&gt;&lt;option&gt;Mix&lt;/option&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stock"&gt;I lager: 4 st&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;799 kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="qtyrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="muted"&gt;Antal&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input class="qty" type="number" min="1" max="10" value="1" data-product="p12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="buy" onclick="addToCart('p12', 799)"&gt;Lägg i korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/article&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Varukorg --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="cart" id="cart" style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Korg&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="cart-items"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="discount" placeholder="Rabattkod (t.ex. JUL10)" oninput="applyDiscount()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;Total: &lt;span id="total"&gt;0&lt;/span&gt; kr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="checkout()"&gt;Betala med Swish&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="clearCart()"&gt;Töm korg&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Swish Modal --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="swishModal" class="modal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="close" onclick="closeModal()"&gt;&amp;times;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Betala med Swish&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Belopp: &lt;span id="modal-amount"&gt;&lt;/span&gt; kr&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Mottagare: &lt;span id="swish-payee"&gt;&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Referens: &lt;span id="order-ref"&gt;&lt;/span&gt; &lt;button onclick="copyRef()"&gt;Kopiera&lt;/button&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="qr-code"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="openSwish()"&gt;Öppna Swish&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="generateReceipt()"&gt;Spara kvitto&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="customer-note" placeholder="Notering (t.ex. portkod)"&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="sendEmail()"&gt;Skicka bekräftelse&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Kontaktformulär --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section style="padding: 2rem; text-align: center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Kontakt&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;form onsubmit="handleContact(event)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" placeholder="Namn" required&gt;&lt;br&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="email" placeholder="E-post" required&gt;&lt;br&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea placeholder="Meddelande" required&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button type="submit"&gt;Skicka&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Footer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Företag: Exempel AB, Org.nr: 123456-7890, Adress: Gata 1, 12345 Stockholm | Mail: info@exempel.se&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;&lt;a href="https://www.konsumentverket.se/angerratt/"&gt;Ångerrätt 14 dagar&lt;/a&gt; | &lt;a href="#privacy"&gt;Integritetspolicy&lt;/a&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;© 2025 Exempel AB&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Cookie Banner --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="cookie-banner" class="cookie-banner" style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Vi använder localStorage för varukorgen. &lt;button onclick="acceptCookies()"&gt;OK&lt;/button&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const SWISH_PAYEE = "1231231231"; // BYT TILL ERT NUMMER</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const EMAILJS_SERVICE_ID = "service_g88v65c"; // Ditt Service ID</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const EMAILJS_TEMPLATE_ID = "template_zrpuoqk"; // Ditt Template ID</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const EMAILJS_PUBLIC_KEY = "YOUR_USER_ID"; // Byt till ditt User ID</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let cart = JSON.parse(localStorage.getItem('cart')) || {};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let discount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let lang = 'sv';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let currentFilter = 'all';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Lager-data (exempel)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const stockData = { p1: 20, p2: 15, p3: 8, p4: 12, p5: 10, p6: 18, p7: 6, p8: 14, p9: 0, p10: 7, p11: 25, p12: 4 };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// EmailJS init</p>
+<p class="p1"><span class="Apple-converted-space">    </span>emailjs.init(EMAILJS_PUBLIC_KEY);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Tema (dark mode)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (localStorage.theme === 'dark' || (!localStorage.theme &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.body.dataset.theme = 'dark'; document.querySelector('button[onclick="toggleTheme()"]').textContent = '☀️';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function toggleTheme() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>localStorage.theme = document.body.dataset.theme;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.querySelector('button[onclick="toggleTheme()"]').textContent = document.body.dataset.theme === 'dark' ? '☀️' : '🌙';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Språk (uppdatera för nya produkter – lägg till översättningar i texts-objektet)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function toggleLang() { lang = lang === 'sv' ? 'en' : 'sv'; updateLang(); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function updateLang() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const texts = {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sv: {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>p1title: 'Bambu-strumpor (3-pack)', p1desc: 'Mjuka, andningsbara vardagsstrumpor.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p2title: 'Bambu T-shirt', p2desc: 'Sval och snabbtorkande i bambumix.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p3title: 'Bambu startkit', p3desc: '1 T-shirt + 3-pack strumpor till rabattpris.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p4title: 'Bambu boxershorts (2-pack)', p4desc: 'Bekväma underbyxor med mjuk bambu.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p5title: 'Bambu hoodie', p5desc: 'Varm och len hoodtröja för kyliga dagar.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p6title: 'Bambu linnen (3-pack)', p6desc: 'Lätta undertröjor för sommar och natt.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p7title: 'Bambu chinos', p7desc: 'Slim-fit byxor i bambumix för kontoret.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p8title: 'Bambu ryggsäck', p8desc: 'Miljövänlig väska med bambufiber.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p9title: 'Bambu handduk', p9desc: 'Snabbtorkande badhandduk i bambu.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p10title: 'Bambu morgonrock', p10desc: 'Mjuk och varm för morgonrutinen.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p11title: 'Bambu kalsonger (5-pack)', p11desc: 'Hälsosamma och antibakteriella underkläder.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p12title: 'Familjepaket', p12desc: 'Strumpor + T-shirts för hela familjen.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>en: {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>p1title: 'Bamboo Socks (3-pack)', p1desc: 'Soft, breathable everyday socks.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p2title: 'Bamboo T-shirt', p2desc: 'Cool and quick-drying bamboo mix.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p3title: 'Bamboo Starter Kit', p3desc: '1 T-shirt + 3-pack socks at discount price.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p4title: 'Bamboo Boxers (2-pack)', p4desc: 'Comfortable underwear with soft bamboo.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p5title: 'Bamboo Hoodie', p5desc: 'Warm and soft hoodie for chilly days.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p6title: 'Bamboo Undershirts (3-pack)', p6desc: 'Light undershirts for summer and night.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p7title: 'Bamboo Chinos', p7desc: 'Slim-fit pants in bamboo mix for the office.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p8title: 'Bamboo Backpack', p8desc: 'Eco-friendly bag with bamboo fiber.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p9title: 'Bamboo Towel', p9desc: 'Quick-drying bath towel in bamboo.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p10title: 'Bamboo Robe', p10desc: 'Soft and warm for morning routine.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p11title: 'Bamboo Briefs (5-pack)', p11desc: 'Healthy and antibacterial underwear.',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>p12title: 'Family Pack', p12desc: 'Socks + T-shirts for the whole family.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>Object.keys(texts.sv).forEach(key =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (key.includes('title')) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const el = document.getElementById(key);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (el) el.textContent = texts[lang][key] || texts.sv[key];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else if (key.includes('desc')) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const el = document.getElementById(key);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (el) el.textContent = texts[lang][key] || texts.sv[key];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>updateLang();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Sök och filter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function filterProducts() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const query = document.getElementById('search').value.toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cards = document.querySelectorAll('.card');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cards.forEach(card =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const title = card.querySelector('h3').textContent.toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const desc = card.querySelector('.muted').textContent.toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const matchesSearch = title.includes(query) || desc.includes(query);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const matchesFilter = currentFilter === 'all' || card.dataset.category === currentFilter;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.style.display = (matchesSearch &amp;&amp; matchesFilter) ? 'block' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function filterCategory(cat) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>currentFilter = cat;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.querySelectorAll('.filter-btn').forEach(btn =&gt; btn.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>event.target.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filterProducts();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Scroll till produkter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function scrollToProducts() { document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth' }); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Varukorg</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function addToCart(id, price) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const qty = parseInt(document.querySelector(`[data-product="${id}"]`).value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (qty &gt; stockData[id]) { alert('Inte tillräckligt i lager!'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (qty &gt; 10) { alert('Max 10 st per produkt!'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const size = document.getElementById(id + '-size').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const color = document.getElementById(id + '-color').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cart[id] = { qty, price, size, color };</p>
+<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem('cart', JSON.stringify(cart));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>updateCart();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gtag('event', 'add_to_cart', { item_id: id });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function updateCart() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cartEl = document.getElementById('cart'); const itemsEl = document.getElementById('cart-items'); const totalEl = document.getElementById('total');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let total = 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>itemsEl.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let productsList = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let id in cart) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const item = cart[id]; const li = document.createElement('li');<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>li.textContent = `${id} (${item.size}, ${item.color}): ${item.qty} x ${item.price} kr`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>itemsEl.appendChild(li); total += item.qty * item.price;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>productsList += `${id} x${item.qty} (${item.size}, ${item.color}) – ${item.qty * item.price} kr; `;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>total = Math.round(total * (1 - discount)); totalEl.textContent = total;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cartEl.style.display = Object.keys(cart).length ? 'block' : 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>window.productsList = productsList; // För mail</p>
+<p class="p1"><span class="Apple-converted-space">      </span>window.totalForMail = total; // För mail</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function applyDiscount() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const code = document.getElementById('discount').value; discount = code === 'JUL10' ? 0.1 : 0; updateCart();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function clearCart() { cart = {}; localStorage.removeItem('cart'); updateCart(); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>updateCart(); // Init</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Swish med mail</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function checkout() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!Object.keys(cart).length) { alert('Korgen är tom!'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const total = document.getElementById('total').textContent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const orderId = 'ORD-' + Date.now();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const note = document.getElementById('customer-note').value || 'Ingen notering';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const ref = orderId;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('modal-amount').textContent = total;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('swish-payee').textContent = SWISH_PAYEE;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('order-ref').innerHTML = orderId + ' &lt;button onclick="copyRef()"&gt;Kopiera&lt;/button&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('swishModal').style.display = 'flex';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Generera QR</p>
+<p class="p1"><span class="Apple-converted-space">      </span>QRCode.toCanvas(document.getElementById('qr-code'), `swish://payment?payee=${SWISH_PAYEE}&amp;amount=${total * 100}&amp;message=${orderId}`, { width: 200 });</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(closeModal, 30000);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gtag('event', 'begin_checkout');</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Skicka mail med orderdetaljer</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const templateParams = {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>to_email: 'johnaxelsson87@gmail.com',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>orderId: orderId,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>total: total,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>products: window.productsList || 'Inga produkter',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>swishRef: ref,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>note: note,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>date: new Date().toLocaleString('sv-SE')</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.then((response) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">           </span>console.log('Mail skickad!', response.status, response.text);</p>
+<p class="p1"><span class="Apple-converted-space">           </span>alert('Orderbekräftelse skickad till johnaxelsson87@gmail.com!');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, (error) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">           </span>console.log('Mail-fel:', error);</p>
+<p class="p1"><span class="Apple-converted-space">           </span>alert('Fel vid mail – kolla konsolen.');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function closeModal() {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('swishModal').style.display = 'none';<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>gtag('event', 'checkout_abandon');<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function openSwish() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const amount = document.getElementById('modal-amount').textContent; const ref = document.getElementById('order-ref').textContent.split(' ')[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>window.location.href = `swish://payment?payee=${SWISH_PAYEE}&amp;amount=${amount * 100}&amp;message=${ref}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gtag('event', 'purchase', { value: amount });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function copyRef() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>navigator.clipboard.writeText(document.getElementById('order-ref').textContent.split(' ')[0]);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alert('Referens kopierad!');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function generateReceipt() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const receipt = `Kvitto\nBelopp: ${document.getElementById('modal-amount').textContent} kr\nReferens: ${document.getElementById('order-ref').textContent.split(' ')[0]}\nTack för ditt köp!`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>navigator.clipboard.writeText(receipt); alert('Kvitto kopierat!');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function sendEmail() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alert('Mail redan skickad vid checkout!');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Kontakt</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function handleContact(event) { event.preventDefault(); alert('Tack! Meddelandet är skickat (demo).'); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Cookies</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!localStorage.cookiesAccepted) { document.getElementById('cookie-banner').style.display = 'block'; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function acceptCookies() { localStorage.cookiesAccepted = true; document.getElementById('cookie-banner').style.display = 'none'; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Analytics för produktvisning</p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.addEventListener('scroll', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cards = document.querySelectorAll('.card');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cards.forEach(card =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (isInViewport(card)) gtag('event', 'view_item', { item_id: card.querySelector('[data-product]').dataset.product });</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function isInViewport(el) { const rect = el.getBoundingClientRect(); return rect.top &lt; window.innerHeight &amp;&amp; rect.bottom &gt; 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
