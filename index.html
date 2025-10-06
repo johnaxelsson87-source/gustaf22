@@ -505,7 +505,7 @@
       cart[id] = { qty, price, size, color, title: productTitles[id] || id };
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
-      alert(`${qty} st ${productTitles[id]} lades till i korgen!`); // Feedback
+      // Ingen alert här längre – korgen uppdateras direkt
       gtag('event', 'add_to_cart', { item_id: id, item_quantity: qty });
       qtyInput.value = 1; // Reset
     }
@@ -541,7 +541,8 @@
       const code = document.getElementById('discount').value.trim().toUpperCase();
       discount = code === 'JUL10' ? 0.1 : 0;
       updateCart();
-      if (discount > 0) alert('Rabatt applicerad!');
+      // Ingen alert här längre
+      if (discount > 0) gtag('event', 'promo_code_applied', { promo_code: code });
     }
     function clearCart() {
       if (confirm('Töm korgen?')) {
