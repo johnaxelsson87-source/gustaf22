@@ -2,13 +2,11 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bambu & Basics – Bambuplagg med Swish-betalning</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Bambu &amp; Basics – Hållbara bambuplagg</title>
   <meta name="description" content="Enkel shopping för bambu-strumpor, T-shirts, underkläder och mer. Betala säkert med Swish – hållbart och bekvämt!">
-  <meta property="og:title" content="Bambu & Basics">
-  <meta property="og:description" content="Hållbara bambuplagg – köp nu via Swish.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=60">
-  <!-- Google Analytics (uppdatera med ditt ID) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Analytics placeholder -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,378 +14,342 @@
     gtag('js', new Date());
     gtag('config', 'GA_MEASUREMENT_ID');
   </script>
-  <!-- QR Code Library -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-  <!-- EmailJS Library -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <style>
-    :root {
-      --bg: #fff; --text: #333; --accent: #4ecdc4;
-      --muted: #666; --border: #eee; --shadow: rgba(0,0,0,0.1);
-    }
-    [data-theme="dark"] { --bg: #1a1a1a; --text: #fff; --border: #333; --shadow: rgba(0,0,0,0.3); }
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: var(--bg); color: var(--text); transition: all 0.3s ease; line-height: 1.6; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--accent); color: white; box-shadow: 0 2px 4px var(--shadow); }
-    .brand { font-size: 1.5rem; font-weight: bold; } .dot { background: white; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem; display: inline-block; }
-    .toggles { display: flex; gap: 1rem; } button, input, select { border: 1px solid var(--border); border-radius: 4px; padding: 0.5rem; font-size: 1rem; transition: all 0.2s; }
-    button:hover, input:focus, select:focus { outline: none; box-shadow: 0 0 0 2px var(--accent); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .hero { text-align: center; padding: 2rem; } .hero h1 { font-size: clamp(1.5rem, 5vw, 3rem); margin-bottom: 1rem; } .cta { background: var(--text); color: var(--bg); padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
-    .cta:hover { background: #555; }
-    .search-filters { display: flex; gap: 1rem; justify-content: center; margin: 1rem; flex-wrap: wrap; } .search-input { flex: 1; max-width: 300px; min-width: 200px; }
-    .filter-btn { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.2s; }
-    .filter-btn.active, .filter-btn:hover { background: white; color: var(--accent); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; max-width: 1200px; margin: 0 auto; }
-    .card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; background: var(--bg); }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px var(--shadow); } img { width: 100%; height: 150px; object-fit: cover; transition: transform 0.3s ease; loading: lazy; }
-    img:hover { transform: scale(1.05); } .pad { padding: 1rem; } .price { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin: 0.5rem 0; }
-    h3 { font-size: 1.1rem; margin: 0.5rem 0 0.25rem 0; } .muted { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-    .qtyrow { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; } .qtyrow label { font-size: 0.85rem; min-width: 40px; }
-    .buy { background: var(--accent); color: white; border: none; cursor: pointer; font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 4px; transition: background 0.2s; }
-    .buy:hover:not(:disabled) { background: #45b7b0; } .buy:disabled { background: var(--muted); cursor: not-allowed; }
-    .stock { color: var(--muted); font-size: 0.8rem; margin-bottom: 0.25rem; } .out-of-stock { color: #e74c3c; }
-    .variations { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.5rem 0; } .variations select { font-size: 0.8rem; min-width: 60px; }
-    .variations label { font-size: 0.8rem; min-width: 50px; }
-    .cart { position: fixed; top: 80px; right: 1rem; background: var(--bg); border: 1px solid var(--border); padding: 1rem; box-shadow: var(--shadow); max-width: 300px; max-height: 80vh; overflow-y: auto; z-index: 1000; border-radius: 8px; }
-    .cart h3 { margin-top: 0; } .cart ul { list-style: none; padding: 0; margin: 0; } .cart li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .cart button { background: #e74c3c; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 2000; }
-    .modal-content { background: var(--bg); padding: 2rem; border-radius: 8px; max-width: 400px; width: 90%; text-align: center; max-height: 80vh; overflow-y: auto; position: relative; }
-    .close { position: absolute; top: 1rem; right: 1rem; cursor: pointer; font-size: 1.5rem; color: var(--muted); }
-    .close:hover { color: var(--text); } #qr-code { margin: 1rem 0; } #qr-code canvas { border: 1px solid var(--border); border-radius: 4px; }
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--text); color: var(--bg); padding: 1rem; text-align: center; z-index: 1000; }
-    footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border); margin-top: 2rem; } 
-    .top-sellers { background: var(--accent); color: white; padding: 1rem; margin: 1rem; border-radius: 8px; text-align: center; }
-    .contact-section { padding: 2rem; max-width: 600px; margin: 0 auto; text-align: center; } .contact-section form { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto; }
-    .contact-section input, .contact-section textarea { padding: 0.75rem; border-radius: 4px; border: 1px solid var(--border); font-family: inherit; } .contact-section textarea { resize: vertical; min-height: 100px; }
-    .contact-section button { background: var(--accent); color: white; border: none; padding: 0.75rem; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
-    .contact-section button:hover { background: #45b7b0; }
-    @media (max-width: 768px) {
-      header { flex-direction: column; gap: 1rem; text-align: center; } .toggles { justify-content: center; }
-      .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; } .search-filters { flex-direction: column; align-items: center; }
-      .cart { top: 120px; right: 0.5rem; left: 0.5rem; max-width: none; } .hero { padding: 1rem; }
-    }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body data-theme="light">
+<body>
   <header>
-    <div class="brand"><span class="dot"></span>Bambu & Basics</div>
-    <div class="toggles">
-      <button id="themeBtn" onclick="toggleTheme()" aria-label="Byt tema">🌙</button>
-    </div>
+    <div class="brand"><span class="dot"></span>Bambu &amp; Basics</div>
   </header>
-  <!-- Toppsäljare -->
-  <section class="top-sellers">
-    <h3>Toppsäljare</h3>
-    <p>Bambu-strumpor (3-pack) – 149 kr | Bambu T-shirt – 249 kr</p>
+
+  <section class="hero">
+    <!-- Flytande knapp för att byta tema placerad i hero-avsnittet -->
+    <button id="themeBtn" class="theme-toggle floating" aria-label="Byt till mörkt tema">🌙</button>
+    <div class="hero-content">
+      <h1>Bambu &amp; Basics</h1>
+      <p class="subtitle">Hållbara bambuplagg för vardagen – betala säkert med Swish</p>
+      <button class="cta" onclick="scrollToProducts()">Se produkter</button>
+    </div>
   </section>
-  <!-- Shop -->
-  <section id="brorsan" class="shop active">
-    <div class="hero">
-      <h1>Bambu & Basics</h1>
-      <p>Hållbara bambuplagg för vardagen – betala säkert med Swish!</p>
-      <div class="search-filters">
-        <input type="text" class="search-input" id="search" placeholder="Sök produkter..." oninput="filterProducts()" aria-label="Sök efter produkter">
-        <div role="group" aria-label="Produktfilter">
-          <button class="filter-btn active" onclick="filterCategory(event, 'all')" aria-pressed="true">Alla</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'strumpor')">Strumpor</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'tröjor')">Tröjor</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'kit')">Kit</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'underkläder')">Underkläder</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'byxor')">Byxor</button>
-          <button class="filter-btn" onclick="filterCategory(event, 'tillbehör')">Tillbehör</button>
+
+  <section class="search-section">
+    <div class="search-filters">
+      <input id="search" class="search-input" type="text" placeholder="Sök produkter..." oninput="filterProducts()">
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterCategory(event, 'all')" aria-pressed="true">Alla</button>
+        <button class="filter-btn" onclick="filterCategory(event, 'klader')" aria-pressed="false">Kläder</button>
+        <button class="filter-btn" onclick="filterCategory(event, 'paket')" aria-pressed="false">Paket</button>
+        <button class="filter-btn" onclick="filterCategory(event, 'accessoarer')" aria-pressed="false">Accessoarer</button>
+      </div>
+    </div>
+  </section>
+
+  <main id="product-grid" class="grid" role="main" aria-label="Produktlista">
+    <!-- Produktkort -->
+    <article class="card" data-category="klader" data-product="p1" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Mjuka bambu-strumpor i 3-pack" loading="lazy">
+      <div class="pad">
+        <h3>Bambu-strumpor (3-pack)</h3>
+        <div class="muted">Mjuka, andningsbara vardagsstrumpor.</div>
+        <div class="variations" role="group" aria-label="Varianter för strumpor">
+          <label for="p1-size">Storlek:</label>
+          <select id="p1-size"><option>S</option><option>M</option><option>L</option></select>
+          <label for="p1-color">Färg:</label>
+          <select id="p1-color"><option>Vit</option><option>Grå</option></select>
+        </div>
+        <div class="stock" id="p1-stock">I lager: 20 st</div>
+        <div class="price">149 kr</div>
+        <div class="qtyrow">
+          <label for="p1-qty" class="muted">Antal</label>
+          <input class="qty" id="p1-qty" type="number" min="1" max="10" value="1" data-product="p1">
+          <button class="buy" onclick="addToCart('p1', 149)">Lägg i korg</button>
         </div>
       </div>
-      <button class="cta" onclick="scrollToProducts()" aria-label="Scrolla till produkter">Se produkter</button>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p2" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Sval bambu T-shirt" loading="lazy">
+      <div class="pad">
+        <h3>Bambu T-shirt</h3>
+        <div class="muted">Sval och snabbtorkande i bambumix.</div>
+        <div class="variations" role="group" aria-label="Varianter för T-shirt">
+          <label for="p2-size">Storlek:</label>
+          <select id="p2-size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+          <label for="p2-color">Färg:</label>
+          <select id="p2-color"><option>Vit</option><option>Svart</option><option>Grön</option></select>
+        </div>
+        <div class="stock" id="p2-stock">I lager: 15 st</div>
+        <div class="price">249 kr</div>
+        <div class="qtyrow">
+          <label for="p2-qty" class="muted">Antal</label>
+          <input class="qty" id="p2-qty" type="number" min="1" max="10" value="1" data-product="p2">
+          <button class="buy" onclick="addToCart('p2', 249)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="paket" data-product="p3" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bambu startkit med T-shirt och strumpor" loading="lazy">
+      <div class="pad">
+        <h3>Bambu startkit</h3>
+        <div class="muted">1 T-shirt + 3-pack strumpor till rabattpris.</div>
+        <div class="variations" role="group" aria-label="Varianter för startkit">
+          <label for="p3-size">Storlek:</label>
+          <select id="p3-size"><option>M</option><option>L</option></select>
+          <label for="p3-color">Färg:</label>
+          <select id="p3-color"><option>Grå</option></select>
+        </div>
+        <div class="stock" id="p3-stock">I lager: 8 st</div>
+        <div class="price">399 kr</div>
+        <div class="qtyrow">
+          <label for="p3-qty" class="muted">Antal</label>
+          <input class="qty" id="p3-qty" type="number" min="1" max="10" value="1" data-product="p3">
+          <button class="buy" onclick="addToCart('p3', 399)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p4" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Bekväma bambu boxershorts i 2-pack" loading="lazy">
+      <div class="pad">
+        <h3>Bambu boxershorts (2-pack)</h3>
+        <div class="muted">Bekväma underbyxor med mjuk bambu.</div>
+        <div class="variations" role="group" aria-label="Varianter för boxershorts">
+          <label for="p4-size">Storlek:</label>
+          <select id="p4-size"><option>M</option><option>L</option><option>XL</option></select>
+          <label for="p4-color">Färg:</label>
+          <select id="p4-color"><option>Svart</option><option>Grå</option></select>
+        </div>
+        <div class="stock" id="p4-stock">I lager: 12 st</div>
+        <div class="price">179 kr</div>
+        <div class="qtyrow">
+          <label for="p4-qty" class="muted">Antal</label>
+          <input class="qty" id="p4-qty" type="number" min="1" max="10" value="1" data-product="p4">
+          <button class="buy" onclick="addToCart('p4', 179)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p5" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Varm bambu hoodie" loading="lazy">
+      <div class="pad">
+        <h3>Bambu hoodie</h3>
+        <div class="muted">Varm och len hoodtröja för kyliga dagar.</div>
+        <div class="variations" role="group" aria-label="Varianter för hoodie">
+          <label for="p5-size">Storlek:</label>
+          <select id="p5-size"><option>M</option><option>L</option><option>XL</option></select>
+          <label for="p5-color">Färg:</label>
+          <select id="p5-color"><option>Grå</option><option>Grön</option></select>
+        </div>
+        <div class="stock" id="p5-stock">I lager: 10 st</div>
+        <div class="price">449 kr</div>
+        <div class="qtyrow">
+          <label for="p5-qty" class="muted">Antal</label>
+          <input class="qty" id="p5-qty" type="number" min="1" max="10" value="1" data-product="p5">
+          <button class="buy" onclick="addToCart('p5', 449)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p6" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Lätta bambu linnen i 3-pack" loading="lazy">
+      <div class="pad">
+        <h3>Bambu linnen (3-pack)</h3>
+        <div class="muted">Lätta undertröjor för sommar och natt.</div>
+        <div class="variations" role="group" aria-label="Varianter för linnen">
+          <label for="p6-size">Storlek:</label>
+          <select id="p6-size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+          <label for="p6-color">Färg:</label>
+          <select id="p6-color"><option>Vit</option><option>Svart</option><option>Grå</option></select>
+        </div>
+        <div class="stock" id="p6-stock">I lager: 18 st</div>
+        <div class="price">299 kr</div>
+        <div class="qtyrow">
+          <label for="p6-qty" class="muted">Antal</label>
+          <input class="qty" id="p6-qty" type="number" min="1" max="10" value="1" data-product="p6">
+          <button class="buy" onclick="addToCart('p6', 299)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p7" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Slim-fit bambu chinos" loading="lazy">
+      <div class="pad">
+        <h3>Bambu chinos</h3>
+        <div class="muted">Slim-fit byxor i bambumix för kontoret.</div>
+        <div class="variations" role="group" aria-label="Varianter för chinos">
+          <label for="p7-size">Storlek:</label>
+          <select id="p7-size"><option>M</option><option>L</option><option>XL</option></select>
+          <label for="p7-color">Färg:</label>
+          <select id="p7-color"><option>Beige</option><option>Svart</option></select>
+        </div>
+        <div class="stock" id="p7-stock">I lager: 6 st</div>
+        <div class="price">599 kr</div>
+        <div class="qtyrow">
+          <label for="p7-qty" class="muted">Antal</label>
+          <input class="qty" id="p7-qty" type="number" min="1" max="10" value="1" data-product="p7">
+          <button class="buy" onclick="addToCart('p7', 599)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="accessoarer" data-product="p8" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Miljövänlig bambu ryggsäck" loading="lazy">
+      <div class="pad">
+        <h3>Bambu ryggsäck</h3>
+        <div class="muted">Miljövänlig väska med bambufiber.</div>
+        <div class="variations" role="group" aria-label="Varianter för ryggsäck">
+          <label for="p8-size">Storlek:</label>
+          <select id="p8-size"><option>Standard</option></select>
+          <label for="p8-color">Färg:</label>
+          <select id="p8-color"><option>Grön</option><option>Svart</option></select>
+        </div>
+        <div class="stock" id="p8-stock">I lager: 14 st</div>
+        <div class="price">349 kr</div>
+        <div class="qtyrow">
+          <label for="p8-qty" class="muted">Antal</label>
+          <input class="qty" id="p8-qty" type="number" min="1" max="10" value="1" data-product="p8">
+          <button class="buy" onclick="addToCart('p8', 349)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="accessoarer" data-product="p9" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1551024506-cbf40702a8f2?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Snabbtorkande bambu handduk" loading="lazy">
+      <div class="pad">
+        <h3>Bambu handduk</h3>
+        <div class="muted">Snabbtorkande badhandduk i bambu.</div>
+        <div class="variations" role="group" aria-label="Varianter för handduk">
+          <label for="p9-size">Storlek:</label>
+          <select id="p9-size"><option>Standard</option></select>
+          <label for="p9-color">Färg:</label>
+          <select id="p9-color"><option>Blå</option></select>
+        </div>
+        <div class="stock" id="p9-stock">Slut i lager</div>
+        <div class="price">199 kr</div>
+        <div class="qtyrow">
+          <label for="p9-qty" class="muted">Antal</label>
+          <input class="qty" id="p9-qty" type="number" min="1" max="10" value="1" data-product="p9">
+          <button class="buy" onclick="addToCart('p9', 199)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p10" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1560472354-b33c0c44a43?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Mjuk bambu morgonrock" loading="lazy">
+      <div class="pad">
+        <h3>Bambu morgonrock</h3>
+        <div class="muted">Mjuk och varm för morgonrutinen.</div>
+        <div class="variations" role="group" aria-label="Varianter för morgonrock">
+          <label for="p10-size">Storlek:</label>
+          <select id="p10-size"><option>L</option><option>XL</option></select>
+          <label for="p10-color">Färg:</label>
+          <select id="p10-color"><option>Vit</option><option>Grå</option></select>
+        </div>
+        <div class="stock" id="p10-stock">I lager: 7 st</div>
+        <div class="price">499 kr</div>
+        <div class="qtyrow">
+          <label for="p10-qty" class="muted">Antal</label>
+          <input class="qty" id="p10-qty" type="number" min="1" max="10" value="1" data-product="p10">
+          <button class="buy" onclick="addToCart('p10', 499)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="klader" data-product="p11" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1602293589930-45aad31a38b5?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Antibakteriella bambu kalsonger i 5-pack" loading="lazy">
+      <div class="pad">
+        <h3>Bambu kalsonger (5-pack)</h3>
+        <div class="muted">Hälsosamma och antibakteriella underkläder.</div>
+        <div class="variations" role="group" aria-label="Varianter för kalsonger">
+          <label for="p11-size">Storlek:</label>
+          <select id="p11-size"><option>S</option><option>M</option><option>L</option></select>
+          <label for="p11-color">Färg:</label>
+          <select id="p11-color"><option>Svart</option></select>
+        </div>
+        <div class="stock" id="p11-stock">I lager: 25 st</div>
+        <div class="price">249 kr</div>
+        <div class="qtyrow">
+          <label for="p11-qty" class="muted">Antal</label>
+          <input class="qty" id="p11-qty" type="number" min="1" max="10" value="1" data-product="p11">
+          <button class="buy" onclick="addToCart('p11', 249)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-category="paket" data-product="p12" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1542272604-787c3835532a?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Familjepaket med strumpor och T-shirts" loading="lazy">
+      <div class="pad">
+        <h3>Familjepaket</h3>
+        <div class="muted">Strumpor + T-shirts för hela familjen.</div>
+        <div class="variations" role="group" aria-label="Varianter för familjepaket">
+          <label for="p12-size">Storlek:</label>
+          <select id="p12-size"><option>Familj</option></select>
+          <label for="p12-color">Färg:</label>
+          <select id="p12-color"><option>Mix</option></select>
+        </div>
+        <div class="stock" id="p12-stock">I lager: 4 st</div>
+        <div class="price">799 kr</div>
+        <div class="qtyrow">
+          <label for="p12-qty" class="muted">Antal</label>
+          <input class="qty" id="p12-qty" type="number" min="1" max="10" value="1" data-product="p12">
+          <button class="buy" onclick="addToCart('p12', 799)">Lägg i korg</button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <aside id="cart" class="cart" aria-hidden="true">
+    <h3>Varukorg</h3>
+    <ul id="cart-items"></ul>
+    <div class="total-row">Totalt: <span id="total">0</span> kr</div>
+    <div class="discount-row">
+      <input id="discount" type="text" placeholder="Rabattkod (t.ex. JUL10)">
+      <button onclick="applyDiscount()">Lös in</button>
     </div>
-    <main class="grid" id="product-grid" role="main" aria-label="Produktlista">
-      <article class="card" data-category="strumpor" data-product="p1" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60" alt="Mjuka bambu-strumpor i 3-pack" loading="lazy">
-        <div class="pad">
-          <h3>Bambu-strumpor (3-pack)</h3>
-          <div class="muted">Mjuka, andningsbara vardagsstrumpor.</div>
-          <div class="variations" role="group" aria-label="Varianter för strumpor">
-            <label for="p1-size">Storlek:</label>
-            <select id="p1-size"><option>S</option><option>M</option><option>L</option></select>
-            <label for="p1-color">Färg:</label>
-            <select id="p1-color"><option>Vit</option><option>Grå</option></select>
-          </div>
-          <div class="stock" id="p1-stock">I lager: 20 st</div>
-          <div class="price">149 kr</div>
-          <div class="qtyrow">
-            <label for="p1-qty" class="muted">Antal</label>
-            <input class="qty" id="p1-qty" type="number" min="1" max="10" value="1" data-product="p1">
-            <button class="buy" onclick="addToCart('p1', 149)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="tröjor" data-product="p2" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Sval bambu T-shirt" loading="lazy">
-        <div class="pad">
-          <h3>Bambu T-shirt</h3>
-          <div class="muted">Sval och snabbtorkande i bambumix.</div>
-          <div class="variations" role="group" aria-label="Varianter för T-shirt">
-            <label for="p2-size">Storlek:</label>
-            <select id="p2-size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
-            <label for="p2-color">Färg:</label>
-            <select id="p2-color"><option>Vit</option><option>Svart</option><option>Grön</option></select>
-          </div>
-          <div class="stock" id="p2-stock">I lager: 15 st</div>
-          <div class="price">249 kr</div>
-          <div class="qtyrow">
-            <label for="p2-qty" class="muted">Antal</label>
-            <input class="qty" id="p2-qty" type="number" min="1" max="10" value="1" data-product="p2">
-            <button class="buy" onclick="addToCart('p2', 249)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="kit" data-product="p3" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Bambu startkit med T-shirt och strumpor" loading="lazy">
-        <div class="pad">
-          <h3>Bambu startkit</h3>
-          <div class="muted">1 T-shirt + 3-pack strumpor till rabattpris.</div>
-          <div class="variations" role="group" aria-label="Varianter för startkit">
-            <label for="p3-size">Storlek:</label>
-            <select id="p3-size"><option>M</option><option>L</option></select>
-            <label for="p3-color">Färg:</label>
-            <select id="p3-color"><option>Grå</option></select>
-          </div>
-          <div class="stock" id="p3-stock">I lager: 8 st</div>
-          <div class="price">399 kr</div>
-          <div class="qtyrow">
-            <label for="p3-qty" class="muted">Antal</label>
-            <input class="qty" id="p3-qty" type="number" min="1" max="10" value="1" data-product="p3">
-            <button class="buy" onclick="addToCart('p3', 399)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="underkläder" data-product="p4" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Bekväma bambu boxershorts i 2-pack" loading="lazy">
-        <div class="pad">
-          <h3>Bambu boxershorts (2-pack)</h3>
-          <div class="muted">Bekväma underbyxor med mjuk bambu.</div>
-          <div class="variations" role="group" aria-label="Varianter för boxershorts">
-            <label for="p4-size">Storlek:</label>
-            <select id="p4-size"><option>M</option><option>L</option><option>XL</option></select>
-            <label for="p4-color">Färg:</label>
-            <select id="p4-color"><option>Svart</option><option>Grå</option></select>
-          </div>
-          <div class="stock" id="p4-stock">I lager: 12 st</div>
-          <div class="price">179 kr</div>
-          <div class="qtyrow">
-            <label for="p4-qty" class="muted">Antal</label>
-            <input class="qty" id="p4-qty" type="number" min="1" max="10" value="1" data-product="p4">
-            <button class="buy" onclick="addToCart('p4', 179)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="tröjor" data-product="p5" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=60" alt="Varm bambu hoodie" loading="lazy">
-        <div class="pad">
-          <h3>Bambu hoodie</h3>
-          <div class="muted">Varm och len hoodtröja för kyliga dagar.</div>
-          <div class="variations" role="group" aria-label="Varianter för hoodie">
-            <label for="p5-size">Storlek:</label>
-            <select id="p5-size"><option>M</option><option>L</option><option>XL</option></select>
-            <label for="p5-color">Färg:</label>
-            <select id="p5-color"><option>Grå</option><option>Grön</option></select>
-          </div>
-          <div class="stock" id="p5-stock">I lager: 10 st</div>
-          <div class="price">449 kr</div>
-          <div class="qtyrow">
-            <label for="p5-qty" class="muted">Antal</label>
-            <input class="qty" id="p5-qty" type="number" min="1" max="10" value="1" data-product="p5">
-            <button class="buy" onclick="addToCart('p5', 449)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="underkläder" data-product="p6" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Lätta bambu linnen i 3-pack" loading="lazy">
-        <div class="pad">
-          <h3>Bambu linnen (3-pack)</h3>
-          <div class="muted">Lätta undertröjor för sommar och natt.</div>
-          <div class="variations" role="group" aria-label="Varianter för linnen">
-            <label for="p6-size">Storlek:</label>
-            <select id="p6-size"><option>S</option><option>M</option><option>L</option></select>
-            <label for="p6-color">Färg:</label>
-            <select id="p6-color"><option>Vit</option></select>
-          </div>
-          <div class="stock" id="p6-stock">I lager: 18 st</div>
-          <div class="price">299 kr</div>
-          <div class="qtyrow">
-            <label for="p6-qty" class="muted">Antal</label>
-            <input class="qty" id="p6-qty" type="number" min="1" max="10" value="1" data-product="p6">
-            <button class="buy" onclick="addToCart('p6', 299)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="byxor" data-product="p7" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=60" alt="Slim-fit bambu chinos" loading="lazy">
-        <div class="pad">
-          <h3>Bambu chinos</h3>
-          <div class="muted">Slim-fit byxor i bambumix för kontoret.</div>
-          <div class="variations" role="group" aria-label="Varianter för chinos">
-            <label for="p7-size">Storlek:</label>
-            <select id="p7-size"><option>M</option><option>L</option><option>XL</option></select>
-            <label for="p7-color">Färg:</label>
-            <select id="p7-color"><option>Beige</option><option>Svart</option></select>
-          </div>
-          <div class="stock" id="p7-stock">I lager: 6 st</div>
-          <div class="price">599 kr</div>
-          <div class="qtyrow">
-            <label for="p7-qty" class="muted">Antal</label>
-            <input class="qty" id="p7-qty" type="number" min="1" max="10" value="1" data-product="p7">
-            <button class="buy" onclick="addToCart('p7', 599)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="tillbehör" data-product="p8" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=60" alt="Miljövänlig bambu ryggsäck" loading="lazy">
-        <div class="pad">
-          <h3>Bambu ryggsäck</h3>
-          <div class="muted">Miljövänlig väska med bambufiber.</div>
-          <div class="variations" role="group" aria-label="Varianter för ryggsäck">
-            <label for="p8-size">Storlek:</label>
-            <select id="p8-size"><option>Standard</option></select>
-            <label for="p8-color">Färg:</label>
-            <select id="p8-color"><option>Grön</option><option>Grå</option></select>
-          </div>
-          <div class="stock" id="p8-stock">I lager: 14 st</div>
-          <div class="price">349 kr</div>
-          <div class="qtyrow">
-            <label for="p8-qty" class="muted">Antal</label>
-            <input class="qty" id="p8-qty" type="number" min="1" max="10" value="1" data-product="p8">
-            <button class="buy" onclick="addToCart('p8', 349)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="tillbehör" data-product="p9" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1551024506-cbf40702a8f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Snabbtorkande bambu handduk" loading="lazy">
-        <div class="pad">
-          <h3>Bambu handduk</h3>
-          <div class="muted">Snabbtorkande badhandduk i bambu.</div>
-          <div class="variations" role="group" aria-label="Varianter för handduk">
-            <label for="p9-size">Storlek:</label>
-            <select id="p9-size" disabled><option>Standard</option></select>
-            <label for="p9-color">Färg:</label>
-            <select id="p9-color" disabled><option>Blå</option></select>
-          </div>
-          <div class="stock out-of-stock" id="p9-stock">Slut i lager</div>
-          <div class="price">199 kr</div>
-          <div class="qtyrow">
-            <label for="p9-qty" class="muted">Antal</label>
-            <input class="qty" id="p9-qty" type="number" min="1" max="10" value="1" data-product="p9" disabled>
-            <button class="buy" disabled>Slut i lager</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="underkläder" data-product="p10" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1560472354-b33c0c44a43?auto=format&fit=crop&w=800&q=60" alt="Mjuk bambu morgonrock" loading="lazy">
-        <div class="pad">
-          <h3>Bambu morgonrock</h3>
-          <div class="muted">Mjuk och varm för morgonrutinen.</div>
-          <div class="variations" role="group" aria-label="Varianter för morgonrock">
-            <label for="p10-size">Storlek:</label>
-            <select id="p10-size"><option>L</option><option>XL</option></select>
-            <label for="p10-color">Färg:</label>
-            <select id="p10-color"><option>Vit</option><option>Grå</option></select>
-          </div>
-          <div class="stock" id="p10-stock">I lager: 7 st</div>
-          <div class="price">499 kr</div>
-          <div class="qtyrow">
-            <label for="p10-qty" class="muted">Antal</label>
-            <input class="qty" id="p10-qty" type="number" min="1" max="10" value="1" data-product="p10">
-            <button class="buy" onclick="addToCart('p10', 499)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="underkläder" data-product="p11" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1602293589930-45aad31a38b5?auto=format&fit=crop&w=800&q=60" alt="Antibakteriella bambu kalsonger i 5-pack" loading="lazy">
-        <div class="pad">
-          <h3>Bambu kalsonger (5-pack)</h3>
-          <div class="muted">Hälsosamma och antibakteriella underkläder.</div>
-          <div class="variations" role="group" aria-label="Varianter för kalsonger">
-            <label for="p11-size">Storlek:</label>
-            <select id="p11-size"><option>S</option><option>M</option><option>L</option></select>
-            <label for="p11-color">Färg:</label>
-            <select id="p11-color"><option>Svart</option></select>
-          </div>
-          <div class="stock" id="p11-stock">I lager: 25 st</div>
-          <div class="price">249 kr</div>
-          <div class="qtyrow">
-            <label for="p11-qty" class="muted">Antal</label>
-            <input class="qty" id="p11-qty" type="number" min="1" max="10" value="1" data-product="p11">
-            <button class="buy" onclick="addToCart('p11', 249)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-      <article class="card" data-category="kit" data-product="p12" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1542272604-787c3835532a?auto=format&fit=crop&w=800&q=60" alt="Familjepaket med strumpor och T-shirts" loading="lazy">
-        <div class="pad">
-          <h3>Familjepaket</h3>
-          <div class="muted">Strumpor + T-shirts för hela familjen.</div>
-          <div class="variations" role="group" aria-label="Varianter för familjepaket">
-            <label for="p12-size">Storlek:</label>
-            <select id="p12-size"><option>Familj</option></select>
-            <label for="p12-color">Färg:</label>
-            <select id="p12-color"><option>Mix</option></select>
-          </div>
-          <div class="stock" id="p12-stock">I lager: 4 st</div>
-          <div class="price">799 kr</div>
-          <div class="qtyrow">
-            <label for="p12-qty" class="muted">Antal</label>
-            <input class="qty" id="p12-qty" type="number" min="1" max="10" value="1" data-product="p12">
-            <button class="buy" onclick="addToCart('p12', 799)">Lägg i korg</button>
-          </div>
-        </div>
-      </article>
-    </main>
-  </section>
-  <!-- Varukorg -->
-  <aside class="cart" id="cart" role="region" aria-label="Varukorg" style="display:none;">
-    <h3>Korg</h3>
-    <ul id="cart-items" aria-live="polite"></ul>
-    <input type="text" id="discount" placeholder="Rabattkod (t.ex. JUL10)" oninput="applyDiscount()" aria-label="Ange rabattkod">
-    <div id="cartTotal">Total: <span id="total">0</span> kr</div>
-    <button onclick="checkout()" id="checkoutBtn" aria-label="Gå till betalning">Betala med Swish</button>
-    <button onclick="clearCart()" id="clearCartBtn" aria-label="Töm varukorg">Töm korg</button>
+    <div class="cart-actions">
+      <button class="checkout-btn" onclick="checkout()">Till betalning</button>
+      <button class="clear-btn" onclick="clearCart()">Töm korg</button>
+    </div>
   </aside>
-  <!-- Swish Modal -->
-  <div id="swishModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+
+  <div id="swishModal" class="modal" aria-hidden="true">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()" aria-label="Stäng modal">&times;</span>
-      <h3 id="modalTitle">Betala med Swish</h3>
+      <h3>Swish-betalning</h3>
       <p>Belopp: <span id="modal-amount"></span> kr</p>
       <p>Mottagare: <span id="swish-payee"></span></p>
-      <p>Referens: <span id="order-ref"></span> <button onclick="copyRef()" aria-label="Kopiera referens">Kopiera</button></p>
-      <div id="qr-code" role="img" aria-label="Swish QR-kod"></div>
-      <button onclick="openSwish()" id="openSwishBtn" aria-label="Öppna Swish-app">Öppna Swish</button>
-      <button onclick="generateReceipt()" id="receiptBtn" aria-label="Generera kvitto">Spara kvitto</button>
-      <input type="text" id="customer-note" placeholder="Notering (t.ex. portkod)" aria-label="Lägg till notering">
-      <button onclick="sendEmail()" id="emailBtn" aria-label="Skicka bekräftelse via e-post">Skicka bekräftelse</button>
+      <p>Referens: <span id="order-ref"></span> <button class="small-btn" onclick="copyRef()">Kopiera</button></p>
+      <div id="qr-code"></div>
+      <textarea id="customer-note" placeholder="Lägg till en notering (frivilligt)" rows="3"></textarea>
+      <button class="small-btn" onclick="sendEmail()">Skicka notering</button>
+      <div class="modal-actions">
+        <button class="primary" onclick="openSwish()">Öppna Swish</button>
+        <button class="primary" onclick="generateReceipt()">Kopiera kvitto</button>
+        <button class="secondary" onclick="closeModal()">Stäng</button>
+      </div>
     </div>
   </div>
-  <!-- Kontaktformulär -->
-  <section class="contact-section" id="contactSection">
+
+  <section class="contact-section">
     <h2>Kontakt</h2>
     <form id="contactForm" onsubmit="handleContact(event)">
-      <input type="text" id="contactName" placeholder="Namn" required aria-label="Ditt namn">
-      <input type="email" id="contactEmail" placeholder="E-post" required aria-label="Din e-postadress">
-      <textarea id="contactMessage" placeholder="Meddelande" required aria-label="Ditt meddelande"></textarea>
-      <button type="submit" id="submitContact" aria-label="Skicka meddelande">Skicka</button>
+      <input id="contactName" type="text" placeholder="Namn">
+      <input id="contactEmail" type="email" placeholder="E-post">
+      <textarea id="contactMessage" placeholder="Meddelande"></textarea>
+      <button type="submit">Skicka</button>
     </form>
   </section>
-  <!-- Footer -->
-  <footer role="contentinfo">
+
+  <footer>
     <p>Företag: Exempel AB, Org.nr: 123456-7890, Adress: Gata 1, 12345 Stockholm | Mail: info@exempel.se</p>
-    <p><a href="https://www.konsumentverket.se/angerratt/">Ångerrätt 14 dagar</a> | <a href="#privacy">Integritetspolicy</a></p>
-    <p>© 2025 Exempel AB</p>
+    <p><a href="#">Ångerrätt 14 dagar</a> | <a href="#">Integritetspolicy</a></p>
   </footer>
-  <!-- Cookie Banner -->
-  <div id="cookie-banner" class="cookie-banner" role="alert" aria-live="polite" style="display:none;">
-    <p>Vi använder localStorage för varukorgen. <button onclick="acceptCookies()" aria-label="Acceptera cookies">OK</button></p>
+
+  <div id="cookie-banner" class="cookie-banner" aria-hidden="true">
+    <p>Vi använder localStorage för varukorgen.</p>
+    <button onclick="acceptCookies()">OK</button>
   </div>
+
   <script>
     // Konstanter och init
     const SWISH_PAYEE = "1231231231"; // BYT TILL ERT NUMMER
@@ -421,6 +383,7 @@
       document.getElementById('themeBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
       document.getElementById('themeBtn').setAttribute('aria-label', newTheme === 'dark' ? 'Byt till ljust tema' : 'Byt till mörkt tema');
     }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
     initTheme();
 
     // Dynamisk lagerhantering
@@ -480,7 +443,7 @@
       document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Varukorg (fixad med bättre hantering av alla produkter)
+    // Varukorg
     function addToCart(id, price) {
       const qtyInput = document.getElementById(`${id}-qty`);
       if (!qtyInput) {
@@ -505,9 +468,8 @@
       cart[id] = { qty, price, size, color, title: productTitles[id] || id };
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
-      // Ingen alert här längre – korgen uppdateras direkt
       gtag('event', 'add_to_cart', { item_id: id, item_quantity: qty });
-      qtyInput.value = 1; // Reset
+      qtyInput.value = 1;
     }
     function updateCart() {
       const cartEl = document.getElementById('cart');
@@ -541,7 +503,6 @@
       const code = document.getElementById('discount').value.trim().toUpperCase();
       discount = code === 'JUL10' ? 0.1 : 0;
       updateCart();
-      // Ingen alert här längre
       if (discount > 0) gtag('event', 'promo_code_applied', { promo_code: code });
     }
     function clearCart() {
@@ -551,13 +512,12 @@
         updateCart();
       }
     }
-    updateCart(); // Init
+    updateCart();
 
-    // Swish med förbättrad email-hantering
-    // Uppdaterad sendConfirmationEmail-funktion (med bättre error-info)
+    // EmailJS helpers
     function sendConfirmationEmail(orderId, total, note) {
       const templateParams = {
-        to_email: 'johnaxelsson87@gmail.com', // Ändra om du vill skicka till annan adress
+        to_email: 'johnaxelsson87@gmail.com',
         orderId: orderId,
         total: total,
         products: window.productsList || 'Inga produkter',
@@ -568,13 +528,12 @@
       emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
         .then((response) => {
           console.log('Mail skickad OK!', response.status, response.text);
-          // Ingen alert här – tyst framgång (eller lägg till en diskret notis om du vill)
         }, (error) => {
-          console.error('EmailJS-fel:', error); // Kolla konsolen för detaljer
+          console.error('EmailJS-fel:', error);
           alert(`Fel vid mail: ${error.text || 'Kontrollera verifiering i EmailJS-dashboarden.'}\nSe konsolen för mer info.`);
         });
     }
-    // Uppdaterad checkout-funktion (skickar mail direkt, ingen popup)
+
     function checkout() {
       if (!Object.keys(cart).length) {
         alert('Korgen är tom!');
@@ -588,7 +547,6 @@
       document.getElementById('swishModal').style.display = 'flex';
       document.getElementById('swishModal').setAttribute('aria-hidden', 'false');
 
-      // Generera QR
       const qrData = `swish://payment?payee=${SWISH_PAYEE}&amount=${total * 100}&message=${orderId}`;
       const qrEl = document.getElementById('qr-code');
       qrEl.innerHTML = '';
@@ -599,12 +557,11 @@
         }
       });
 
-      // Skicka mail direkt här (utan notering initialt)
       sendConfirmationEmail(orderId, total, '');
-
       setTimeout(closeModal, 30000);
       gtag('event', 'begin_checkout', { value: total });
     }
+
     function closeModal() {
       document.getElementById('swishModal').style.display = 'none';
       document.getElementById('swishModal').setAttribute('aria-hidden', 'true');
@@ -626,16 +583,14 @@
       const receipt = `Kvitto\nBelopp: ${amount} kr\nReferens: ${ref}\nTack för ditt köp!`;
       navigator.clipboard.writeText(receipt).then(() => alert('Kvitto kopierat!'));
     }
-    // Uppdaterad sendEmail (för notering i modalen)
     function sendEmail() {
       const note = document.getElementById('customer-note').value || 'Ingen notering';
       const orderId = document.getElementById('order-ref').textContent;
       const total = parseInt(document.getElementById('modal-amount').textContent);
-      sendConfirmationEmail(orderId, total, note); // Skickar uppdaterad version
-      // Ingen alert – tyst, men kolla konsolen
+      sendConfirmationEmail(orderId, total, note);
     }
 
-    // Kontaktformulär (simulerat, kan utökas med EmailJS)
+    // Kontaktformulär
     function handleContact(event) {
       event.preventDefault();
       const name = document.getElementById('contactName').value.trim();
@@ -645,7 +600,6 @@
         alert('Fyll i alla fält!');
         return;
       }
-      // Här kan du lägga till EmailJS för kontaktmail om du vill
       console.log('Kontakt:', { name, email, message });
       alert('Tack! Meddelandet är skickat.');
       document.getElementById('contactForm').reset();
@@ -654,7 +608,7 @@
 
     // Cookies
     if (!localStorage.getItem('cookiesAccepted')) {
-      document.getElementById('cookie-banner').style.display = 'block';
+      document.getElementById('cookie-banner').style.display = 'flex';
     }
     function acceptCookies() {
       localStorage.setItem('cookiesAccepted', 'true');
@@ -681,7 +635,6 @@
       return rect.top < window.innerHeight * 0.75 && rect.bottom > 0;
     }
 
-    // Keyboard-nav
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
     });
